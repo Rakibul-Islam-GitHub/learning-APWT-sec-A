@@ -1,0 +1,72 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Employer List</title>
+	<link rel="stylesheet" type="text/css" href="/abc/css/style.css">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+</head>
+<style>
+	.jobtable{
+		margin-left: 29%;
+
+	}
+</style>
+<body>
+	<div id="list-table2">
+		<h1> Job list</h1>
+		
+		<a class="myButton" href="/employer"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z"/>
+			
+		</svg> Back</a>
+	<a class="myButton btn-red" href="/logout">logout</a> 
+	<br>
+	
+	  
+		<table class="mt-4 jobtable">
+			<tr>
+				
+			<th>ID</th>
+			<th>Image</th>
+			<th>Company Name</th>
+			<th>Job title</th>
+			<th>Location</th>
+			<th>Salary</th>
+			<th>Action</th>
+			</tr>
+			
+		<% 
+			jobs.forEach( function(job){ %>
+			<tr>
+				<td><%= job.id %></td>
+				<td><img src="/abc/image/<%= job.image %>" width="22" height="22" alt="pic"></td>
+				<td><%= job.companyname %></td>
+				<td><%= job.title %></td>
+				<td><%= job.location %></td>
+				<td><%= job.salary %></td>
+				<td>
+					<a class="editdltbtn" href="/job/edit/<%= job.id %>">Edit</a> |
+					<a class="editdltbtn" href="/job/delete/<%= job.id %>">Delete</a>
+				</td>
+			</tr>
+
+		<%
+			}); 
+		%>
+			
+		</table>
+
+	</div>
+
+	
+		
+
+	
+
+</body>
+</html>
+ 
+

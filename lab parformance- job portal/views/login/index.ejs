@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+   <style>
+       body {
+  background-color: #5cb85c !important;
+}
+#msform {
+	width: 400px;
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+}
+#msform fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	
+	box-sizing: border-box;
+	width: 80%;
+	margin: 0 10%;
+	position: absolute;
+}
+#msform fieldset:not(:first-of-type) {
+	display: none;
+}
+
+
+   </style>
+    <body>
+        <h1 class="text-center">Welcome to Job portal</h1>
+    <form method="POST" id="msform">
+        <fieldset>
+        <h1>Login</h1>
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-user"> </span></span>
+      <input type="text" name="username" class="form-control" placeholder="Username">
+    </div><br>
+       <div class="input-group input-group-lg">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"> </span></span>
+      <input type="password" name="password" class="form-control" placeholder="•••••••••••">
+    </div>
+      <br>
+          <input type="submit" name="submit" class="btn btn-success">
+    
+        </fieldset>
+    </form>
+      </body>
+</html>

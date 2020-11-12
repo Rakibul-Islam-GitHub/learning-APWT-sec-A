@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search job</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <link rel="stylesheet" type="text/css" href="/abc/css/style.css">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+ 
+</head>
+<body>
+   
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-8 col-xl-6">
+        <div class="row align-items-center mt-5">
+            <a class="myButton" href="/employer"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z"/>
+                
+            </svg> Back</a>
+          </div>
+
+          <div class="row align-items-center mt-2">
+              
+            
+            <h2>Search for Job</h2>
+            <input class="form-control" type="text" name="search" id="search2" autocomplete="off" placeholder="search job title here....">
+
+          </div>
+          
+        
+         <div id="output"></div>
+      </div>           
+    </div>
+ </div>
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+       $("#search2").keyup(function(){
+          var query = $(this).val();
+          if (query != "") {
+            $.ajax({
+              url: '/job/search',
+              method: 'POST',
+              dataType:'json',
+              data: {query:query},
+              success: function(data){
+                 // alert(data);
+
+                // var content = '';
+                //             var data = $.parseJSON(data);
+
+                //             $.each(data, function(i, post) {
+                //                 content += '<li>' + post.post_title + '</li>';
+                //             });
+                //             alert(content);
+
+                //             $(content).appendTo("#output");
+                
+                 
+                 let datas= Object.entries(data);
+                //  alert(Object.values(data));
+                 document.getElementById("output").innerHTML= Object.values(data);
+
+        //          datas.forEach(myFunction);
+
+        //          function myFunction(item) {
+        //              alert(item);
+        //          document.getElementById("output").innerHTML+=item +" <br>"; 
+        // }
+ 
+               // $('#output').html(data[0].name);
+                $('#output').css('display', 'block');
+ 
+                $("#search2").focusout(function(){
+                    $('#output').css('display', 'none');
+                });
+                $("#search2").focusin(function(){
+                    $('#output').css('display', 'block');
+                });
+              }
+            });
+          } else {
+          $('#output').css('display', 'none');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
