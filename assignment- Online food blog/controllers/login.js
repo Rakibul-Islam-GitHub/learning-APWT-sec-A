@@ -1,5 +1,5 @@
 const express 		= require('express');
-const loginModel		= require.main.require('./models/loginModel');
+const userModel		= require.main.require('./models/userModel');
 const router 		= express.Router();
 
 
@@ -18,14 +18,14 @@ router.post('/', (req, res)=>{
 	};
 
 
-	loginModel.validate(user, function(status){
+	userModel.validate(user, function(status){
 
 		console.log(status);
 
 
 		if(status){
 
-			loginModel.getAll(function(results){
+			userModel.getAll(function(results){
 
 				if(results[0].role=='admin'){
 					res.render('admin/index');

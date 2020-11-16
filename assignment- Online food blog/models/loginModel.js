@@ -24,5 +24,20 @@ module.exports= {
 		db.getResults(sql, function(results){
 			callback(results);
 		});
+	},
+	insert: function(user, callback){
+
+		let sql= 'insert into login (username, password, role) values ("'+user.username+'", "'+user.password+'", "user")';
+		db.execute(sql, function(status){
+
+			if(status){
+				callback(true);
+
+			}else{
+				callback(false);
+			}
+
+		});
+
 	}
 }
