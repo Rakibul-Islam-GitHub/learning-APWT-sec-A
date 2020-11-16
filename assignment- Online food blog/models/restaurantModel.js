@@ -31,7 +31,15 @@ module.exports= {
 		
 
 	},
-	update:function(user, callback){
+	update:function(restaurant, callback){
+		let sql= 'update restaurant set name= "'+restaurant.name+'", location= "'+restaurant.location+'", phone= "'+restaurant.phone+'", description= "'+restaurant.description+'", image="'+restaurant.image+'" where id= "'+restaurant.id+'"';
+		db.execute(sql, function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
 
 		
 

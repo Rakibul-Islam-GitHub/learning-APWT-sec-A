@@ -6,10 +6,7 @@
   </head>
 
   <style>
-	.jobtable{
-		margin-left: 34%;
-
-	}
+	
 </style>
   
     <body>
@@ -30,24 +27,25 @@
                 <th>ID</th>
                 <th>Image</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Address</th>
+                <th>Location</th>
+                <th>Mobile no.</th>
                 
                 <th>Action</th>
                 </tr>
                 
             <% 
-                users.forEach( function(user){ %>
+                restaurants.forEach( function(restaurant){ %>
                 <tr>
-                    <td><%= user.id %></td>
-                    <td><img src="/image/<%= user.image %>" width="22" height="22" alt="pic"></td>
-                    <td><%= user.name %></td>
-                    <td><%= user.email %></td>
-                    <td><%= user.address %></td>
+                    <td><%= restaurant.id %></td>
+                    <td><img src="/image/restaurant/<%= restaurant.image %>" width="32" height="25" alt="pic"></td>
+                    <td><%= restaurant.name %></td>
+                    <td><%= restaurant.location %></td>
+                    <td><%= restaurant.phone %></td>
                    
                     <td>
-                        <!-- <a class="editdltbtn" href="/edit/<%= user.id %>">Edit</a> | -->
-                        <a class="editdltbtn" href="/admin/userlist/delete/<%= user.id %>">Delete</a>
+                        <a class="editdltbtn" href="/admin/allrestaurant/addmenu/<%= restaurant.id %>">Add Menu</a> |
+                        <a class="editdltbtn" href="/admin/allrestaurant/edit/<%= restaurant.id %>">Edit</a> |
+                        <a class="editdltbtn" href="/admin/allrestaurant/delete/<%= restaurant.id %>">Delete</a>
                     </td>
                 </tr>
     
