@@ -1,5 +1,7 @@
 const express 	= require('express');
-const userModel		= require.main.require('./models/userModel');
+const multer            = require('multer');
+const path              = require('path');
+const restaurantModel		= require.main.require('./models/restaurantModel');
 const { check, validationResult } = require('express-validator');
 const router 	= express.Router();
 
@@ -10,6 +12,16 @@ router.get('*',  (req, res, next)=>{
 		next();
 	}
 });
+
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+	  cb(null, 'assets/image/restaurant/')
+	},
+	filename: function (req, file, cb) {
+	  cb(null, Date.now() + path.extname(file.originalname)) 
+	}
+  });
+  var upload = multer({ storage: storage });
 
 
 
@@ -36,6 +48,54 @@ router.get('/profile', function(req, res){
 router.post('/profile', function(req, res){
 	
 
+});
+
+router.get('/addrestaurant', function(req, res){
+
+    res.render('admin/addrestaurant');
+	
+
+});
+router.post('/addrestaurant', upload.single('pic'), (req, res)=>{
+
+    let restaurant={
+			
+        name : req.body.name,
+        location : req.body.location,
+        phone : req.body.phone,
+        description: req.body.description,
+        image: req.file.filename
+        
+
+    };
+    
+    restaurantModel.insert(restaurant, function(status){
+
+        if(status){
+            console.log('restaurant inserted');
+            res.redirect('/admin');
+        }else{
+            res.redirect('/admin/addrestaurant');
+
+        }
+
+    });
+
+	// const errors = validationResult(req);
+    // console.log(errors);
+
+    // if (!errors.isEmpty()) {
+		
+    //   return res.status(422).json(errors.array());
+    // } else {
+		
+
+		
+      
+    // }
+	
+	
+			
 });
 router.get('/userlist', function(req, res){
     userModel.getAll(function(results){

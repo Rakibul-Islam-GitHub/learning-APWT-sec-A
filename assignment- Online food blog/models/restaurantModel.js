@@ -3,19 +3,31 @@ const db = require('./db');
 module.exports= {
 	
 	getById: function(id, callback){
-		var sql = 'select * from restaurants where id = "'+id+'" ';
+		var sql = 'select * from restaurant where id = "'+id+'" ';
 		db.getResults(sql, function(results){
 			callback(results);
 		});
 
 	},
 	getAll: function(callback){
-		var sql = "select * from restaurants";
+		var sql = "select * from restaurant";
 		db.getResults(sql, function(results){
 			callback(results);
 		});
 	},
-	insert: function(user, callback){
+	insert: function(restaurant, callback){
+
+		let sql= 'insert into restaurant (name, location, phone, description, image) values ("'+restaurant.name+'", "'+restaurant.location+'", "'+restaurant.phone+'", "'+restaurant.description+'", "'+restaurant.image+'")';
+		db.execute(sql, function(status){
+
+			if(status){
+				callback(true);
+
+			}else{
+				callback(false);
+			}
+
+		});
 		
 
 	},
