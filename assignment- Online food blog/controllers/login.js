@@ -28,9 +28,11 @@ router.post('/', (req, res)=>{
 			userModel.getAll(function(results){
 
 				if(results[0].role=='admin'){
-					res.render('admin/index');
+					res.cookie('uname', req.body.username);
+					res.redirect('/admin');
 				}else{
-					res.render('home/index');
+					res.cookie('uname', req.body.username);
+					res.redirect('/user');
 				}
 			});
 			

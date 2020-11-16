@@ -12,9 +12,12 @@ router.get('*',  (req, res, next)=>{
 });
 
 
+router.get('/', function(req, res){
+	res.render('user/index');
 
+});
 router.get('/search', function(req, res){
-	res.render('admin/search');
+	res.render('user/search');
 
 });
 
@@ -23,7 +26,7 @@ router.post('/search', function(req, res){
 	let content= req.body.query;
 
 	userModel.search(content, function(results){
-		//res.render('home/employerlist', {users: results});
+		
 		console.log(results[0]);
 		res.json(results[0]);
 	});

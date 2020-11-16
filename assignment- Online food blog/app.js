@@ -8,6 +8,7 @@ const home				= require('./controllers/home');
 const login				= require('./controllers/login');
 const logout			= require('./controllers/logout');
 const user				= require('./controllers/user');
+const admin				= require('./controllers/admin');
 
 
 const app				= express();
@@ -27,6 +28,7 @@ app.use('/home', home);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/user', user);
+app.use('/admin', admin);
 
 
 //router

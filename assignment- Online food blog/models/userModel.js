@@ -22,7 +22,7 @@ module.exports= {
 
 	},
 	getAll: function(callback){
-		var sql = "select * from users";
+		var sql = "select * from users where role!='admin'";
 		db.getResults(sql, function(results){
 			callback(results);
 		});
