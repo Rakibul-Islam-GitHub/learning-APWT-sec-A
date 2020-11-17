@@ -46,14 +46,14 @@ module.exports= {
 	},
 
 	search: function(content, callback){
-		var sql = 'SELECT name from restaurants where name like "%'+content+'%"';
+		var sql = 'SELECT name from restaurant where name like "%'+content+'%"';
 		db.getResults(sql, function(results){
 			callback(results);
 		});
 
 	},
 	delete: function(id, callback){
-		let sql= 'delete from restaurants where id= "'+id+'" ';
+		let sql= 'delete from restaurant where id= "'+id+'" ';
 		db.execute(sql, function(status){
 			if(status){
 				callback(true);

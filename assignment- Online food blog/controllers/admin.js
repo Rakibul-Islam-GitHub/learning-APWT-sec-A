@@ -198,12 +198,18 @@ router.get('/allrestaurant/delete/:id', (req, res)=>{
 	
 });
 
-router.post('/delete/:id', (req, res)=>{
+router.post('/allrestaurant/delete/:id', (req, res)=>{
 
 	let id= req.params.id;
 
 
     restaurantModel.delete(id, function(status){
+        if(status){
+            res.redirect('/admin/allrestaurant');
+        }else{
+            res.send('<h1>Something wrong! Try again </h1>');
+        }
+
         
         
 	});

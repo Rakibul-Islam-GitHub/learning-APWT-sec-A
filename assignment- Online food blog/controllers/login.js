@@ -1,5 +1,6 @@
 const express 		= require('express');
 const userModel		= require.main.require('./models/userModel');
+const loginModel		= require.main.require('./models/loginModel');
 const router 		= express.Router();
 
 
@@ -25,8 +26,9 @@ router.post('/', (req, res)=>{
 
 		if(status){
 
-			userModel.getAll(function(results){
+			loginModel.getAll(function(results){
 
+				console.log(results[0].role);
 				if(results[0].role=='admin'){
 					res.cookie('uname', req.body.username);
 					res.redirect('/admin');
