@@ -16,7 +16,7 @@ router.get('*',  (req, res, next)=>{
 
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-	  cb(null, 'assets/image/restaurant/')
+	  cb(null, 'assets/image/')
 	},
 	filename: function (req, file, cb) {
 	  cb(null, Date.now() + path.extname(file.originalname)) 
@@ -115,6 +115,44 @@ router.post('/profile', [
 	
 
 });
+
+
+router.get('/profile/edit', function(req, res){
+	let username= req.cookies['uname'];
+	userModel.getprofile(username, function(results){
+		
+		
+		var image = results[0].image;
+		
+		
+		res.render('admin/profilepicupdate', { image: image});
+
+		
+	});
+});
+
+
+router.post('/profile/edit',  upload.single('pic'), function(req, res){
+	let username= req.cookies['uname'];
+	let details={
+		username: username,
+		image: req.file.filename
+    };
+	userModel.profilePicUpdate(details, function(status){
+		if(status){
+			console.log('profile pic updated');
+			res.redirect('/admin/profile');
+		}else{
+            res.send('something wrong! try again');
+
+		}
+
+	});
+	
+
+});
+
+
 
 router.get('/addrestaurant', function(req, res){
 

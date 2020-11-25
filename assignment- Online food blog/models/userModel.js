@@ -62,6 +62,17 @@ module.exports= {
 		});
 
 	},
+	profilePicUpdate: function(user, callback){
+		let sql= 'update users set image= "'+user.image+'" where username= "'+user.username+'"';
+		db.execute(sql, function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+
+	},
 
 	search: function(content, callback){
 		var sql = 'SELECT name from users where name like "%'+content+'%"';
