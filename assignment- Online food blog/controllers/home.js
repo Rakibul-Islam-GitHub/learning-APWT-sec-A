@@ -29,8 +29,21 @@ console.log(results);
 
   });
 
-  router.post('/', (req, res)=>{
+router.post('/', (req, res)=>{
     
+  });
+
+router.get('/restaurant/:id', (req, res)=>{
+  let id= req.params.id;
+    restaurantModel.getMenuById(id, function(results){
+console.log(results);
+      if(results.length >0){
+        
+        res.render('home/restaurant', {menus: results});
+      }
+  
+});
+
   });
 
 

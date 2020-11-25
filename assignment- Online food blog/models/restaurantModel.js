@@ -9,6 +9,13 @@ module.exports= {
 		});
 
 	},
+	getMenuById: function(id, callback){
+		var sql = 'select * from menu where restaurantid = "'+id+'" ';
+		db.getResults(sql, function(results){
+			callback(results);
+		});
+
+	},
 	getAll: function(callback){
 		var sql = "select * from restaurant";
 		db.getResults(sql, function(results){
