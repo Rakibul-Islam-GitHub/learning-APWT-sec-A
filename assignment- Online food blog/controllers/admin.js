@@ -337,6 +337,38 @@ router.post('/allrestaurant/delete/:id', (req, res)=>{
 	});
 	
 });
+router.get('/allrestaurant/addmenu/:id', (req, res)=>{
+
+    res.render('admin/addmenu');
+    
+});
+router.post('/allrestaurant/addmenu/:id', upload.single('pic'), (req, res)=>{
+
+    let id= req.params.id;
+    let menu={
+		restaurantid: id,	
+        title : req.body.title,
+        details : req.body.details,
+        price : req.body.price,
+        image: req.file.filename
+        
+
+    };
+
+
+    restaurantModel.addMenu(menu, function(status){
+        if(status){
+            res.redirect('/admin/allrestaurant');
+        }else{
+            res.send('<h1>Something wrong! Try again </h1>');
+        }
+
+        
+        
+	});
+	
+});
+
 
 
 
