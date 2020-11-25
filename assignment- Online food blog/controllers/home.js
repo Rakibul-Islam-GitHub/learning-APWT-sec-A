@@ -3,6 +3,7 @@ const multer            = require('multer');
 const path              = require('path');
 const loginModel		= require.main.require('./models/loginModel');
 const userModel         = require.main.require('./models/userModel');
+const restaurantModel         = require.main.require('./models/restaurantModel');
 const router 		= express.Router();
 
 var storage = multer.diskStorage({
@@ -14,6 +15,24 @@ var storage = multer.diskStorage({
 	}
   });
   var upload = multer({ storage: storage });
+
+
+  router.get('/', (req, res)=>{
+    restaurantModel.getAll(function(results){
+console.log(results);
+      if(results.length >0){
+        
+        res.render('home/index', {restaurants: results});
+      }
+  
+});
+
+  });
+
+  router.post('/', (req, res)=>{
+    
+  });
+
 
 router.get('/signup', (req, res)=>{
 	res.render('user/signup');

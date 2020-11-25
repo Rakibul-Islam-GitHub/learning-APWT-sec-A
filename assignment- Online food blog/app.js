@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(exSession({secret: 'secret value', saveUninitialized: true, resave: false}));
 
-app.use('/home', home);
+app.use('/', home);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/user', user);
@@ -32,12 +32,6 @@ app.use('/admin', admin);
 
 
 //router
-app.get('/', (req, res)=>{
-
-	res.render('home/index');
-	
-	
-});
 
 //server startup
 app.listen(port, (error)=>{
