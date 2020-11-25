@@ -52,8 +52,14 @@ module.exports= {
 
 	},
 	update:function(user, callback){
-
-		
+		let sql= 'update users set name= "'+user.name+'", address= "'+user.address+'", phone= "'+user.phone+'", email="'+user.email+'" where username= "'+user.id+'"';
+		db.execute(sql, function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
 
 	},
 

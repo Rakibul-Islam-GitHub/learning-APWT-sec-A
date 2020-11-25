@@ -61,7 +61,57 @@ router.get('/profile', function(req, res){
 	
 
 });
-router.post('/profile', function(req, res){
+router.post('/profile', [
+    check('name').not().isEmpty().withMessage('Name can not be empty'),
+	check('address', 'Please fill the address').not().isEmpty(),
+	check('phone', 'enter phone number').isNumeric().isLength({min:11, max:11}).withMessage('Phone number should have 11 digits'),
+	check('email', 'Invalid email address').isEmail(),
+    
+  ], function(req, res){
+	const errors = validationResult(req);
+	console.log(errors);
+	
+
+    if (!errors.isEmpty()) {
+		profilealerts = errors.array();
+		userModel.getprofile(req.cookies['uname'], function(results){
+		
+			var name = results[0].name;
+			var address = results[0].address;
+			var phone = results[0].phone;
+			var image = results[0].image;
+			var email = results[0].email;
+			
+			res.render('admin/profile', {profilealerts, name: name, address: address,  phone: phone, image: image, email: email});
+			
+			
+		});
+		
+      
+    } else{
+		
+	let details={
+		id: req.cookies['uname'],
+        name : req.body.name,
+        address : req.body.address,
+		phone: req.body.phone,
+		email: req.body.email
+    };
+    console.log(details);
+
+        userModel.update(details, function(status){
+        if(status){
+            console.log('profile details updated');
+			res.redirect('/admin/profile');
+        }else{
+            res.send('try again later!');
+
+        }
+
+    });
+	
+
+	}
 	
 
 });
