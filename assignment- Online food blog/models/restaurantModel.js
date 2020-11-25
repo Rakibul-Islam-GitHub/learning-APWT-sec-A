@@ -16,6 +16,14 @@ module.exports= {
 		});
 
 	},
+	getcomment: function(restaurantid, menuid, callback){
+		var sql = 'select * from comment where restaurantid = "'+restaurantid+'" and menuid= "'+menuid+'" ';
+		db.getResults(sql, function(results){
+			callback(results);
+		});
+
+	},
+
 	getAll: function(callback){
 		var sql = "select * from restaurant";
 		db.getResults(sql, function(results){
@@ -36,8 +44,23 @@ module.exports= {
 
 		});
 		
-
 	},
+    insertComment: function(comment, callback){
+
+		let sql= 'insert into comment (restaurantid, menuid, comment, commentby, date, time) values ("'+comment.restaurantid+'", "'+comment.menuid+'", "'+comment.comment+'", "'+comment.commentby+'", "'+comment.date+'", "'+comment.time+'")';
+		db.execute(sql, function(status){
+
+			if(status){
+				callback(true);
+
+			}else{
+				callback(false);
+			}
+
+		});
+		
+	},
+
 	addMenu : function(menu, callback){
 		console.log(menu);
 		let sql= 'insert into menu (restaurantid, title, details, price, image) values ("'+menu.restaurantid+'", "'+menu.title+'", "'+menu.details+'", "'+menu.price+'", "'+menu.image+'")';
