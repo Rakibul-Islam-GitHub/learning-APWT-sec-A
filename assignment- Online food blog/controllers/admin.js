@@ -43,6 +43,21 @@ router.post('/search', function(req, res){
 });
 
 router.get('/profile', function(req, res){
+
+    let id= req.cookies['uname'];
+	userModel.getprofile(id, function(results){
+		
+		var name = results[0].name;
+		var address = results[0].address;
+		var phone = results[0].phone;
+		var image = results[0].image;
+		var email = results[0].email;
+		
+		res.render('admin/profile', {name: name, address: address,  phone: phone, image: image, email: email});
+
+		
+	});
+
 	
 
 });
@@ -110,6 +125,25 @@ router.get('/userlist', function(req, res){
 	});
 	
 
+});
+
+router.get('/userlist/delete/:id', (req, res)=>{
+	let id= req.params.id;
+
+	    userModel.getById(id, function(results){
+		
+		var name = results[0].name;
+		var email = results[0].email;
+		var address = results[0].phone;
+
+		res.render('admin/userdelete', {name: name, email: email, address: address});
+
+		
+	});
+
+
+	
+	
 });
 
 router.get('/allrestaurant', function(req, res){
