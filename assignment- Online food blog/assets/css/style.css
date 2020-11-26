@@ -65,3 +65,10 @@ th {
 .editdltbtn {
   color: #bd2130;
 }
+a.mr-2.color-white {
+  font-size: x-large;
+}
+a.color-white.navbar-brand {
+  font-size: 30px;
+  margin-right: 300px;
+}

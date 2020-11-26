@@ -120,6 +120,47 @@ const currentdate = date.toISOString().split("T")[0];
 
 });
 
+router.get('/foodexperience', (req,res)=>{
+
+  res.render('home/foodexperience');
+
+});
+
+router.post('/foodexperience', (req,res)=>{
+   console.log(req.body.post);
+   const date = new Date();
+   var seconds = date.getSeconds();
+ var minutes = date.getMinutes();
+ var hour = date.getHours();
+ 
+ var ampm = hour >= 12 ? 'PM' : 'AM';
+ hour = hour % 12;
+ hour = hour ? hour : 12; // the hour '0' should be '12'
+ minutes = minutes < 10 ? '0'+minutes : minutes;
+ let time= hour +':'+minutes+':'+seconds +' '+ampm;
+ 
+ const currentdate = date.toISOString().split("T")[0];
+   let posts= {
+     author : req.cookies['uname'],
+     post : req.body.post,
+     date : currentdate
+   }
+   restaurantModel.insertFoodexp(posts, function(status){
+
+    if(status){
+       
+        res.redirect('/foodexperience');
+       
+        
+    }else{
+        res.send('somwthing wrong!');
+
+    }
+
+});
+
+});
+
 
 router.get('/signup', (req, res)=>{
 	res.render('user/signup');

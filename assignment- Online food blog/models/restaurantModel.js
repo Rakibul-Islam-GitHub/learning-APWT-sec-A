@@ -61,6 +61,22 @@ module.exports= {
 		
 	},
 
+	insertFoodexp: function(post, callback){
+
+		let sql= 'insert into foodexp (author, post, date) values ("'+post.author+'", "'+post.post+'", "'+post.date+'")';
+		db.execute(sql, function(status){
+
+			if(status){
+				callback(true);
+
+			}else{
+				callback(false);
+			}
+
+		});
+		
+	},
+
 	addMenu : function(menu, callback){
 		console.log(menu);
 		let sql= 'insert into menu (restaurantid, title, details, price, image) values ("'+menu.restaurantid+'", "'+menu.title+'", "'+menu.details+'", "'+menu.price+'", "'+menu.image+'")';
