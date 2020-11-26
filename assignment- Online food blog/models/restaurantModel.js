@@ -30,6 +30,21 @@ module.exports= {
 			callback(results);
 		});
 	},
+
+	getfoodexperience :  function(callback){
+		var sql = "select * from foodexp";
+		db.getResults(sql, function(results){
+			callback(results);
+		});
+	},
+
+	getfoodexperienceById :  function(postid, callback){
+		var sql = 'select * from foodexp where id= "'+postid+'"';
+		db.getResults(sql, function(results){
+			callback(results);
+		});
+	},
+
 	insert: function(restaurant, callback){
 
 		let sql= 'insert into restaurant (name, location, phone, description, image) values ("'+restaurant.name+'", "'+restaurant.location+'", "'+restaurant.phone+'", "'+restaurant.description+'", "'+restaurant.image+'")';
@@ -64,6 +79,21 @@ module.exports= {
 	insertFoodexp: function(post, callback){
 
 		let sql= 'insert into foodexp (author, post, date) values ("'+post.author+'", "'+post.post+'", "'+post.date+'")';
+		db.execute(sql, function(status){
+
+			if(status){
+				callback(true);
+
+			}else{
+				callback(false);
+			}
+
+		});
+		
+	},
+	insertFoodexpComment: function(comment, callback){
+
+		let sql= 'insert into foodexpcomment (postid, commentby, comment, date, time) values ("'+comment.postid+'", "'+comment.commentby+'", "'+comment.comment+'", "'+comment.date+'", "'+comment.time+'")';
 		db.execute(sql, function(status){
 
 			if(status){

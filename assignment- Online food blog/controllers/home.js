@@ -122,7 +122,14 @@ const currentdate = date.toISOString().split("T")[0];
 
 router.get('/foodexperience', (req,res)=>{
 
-  res.render('home/foodexperience');
+  restaurantModel.getfoodexperience(function(results){
+    if (results.length>0) {
+      res.render('home/foodexperience', {results : results});
+    }
+
+
+  });
+
 
 });
 
@@ -161,6 +168,58 @@ router.post('/foodexperience', (req,res)=>{
 
 });
 
+router.get('/foodexperience/:id', (req,res)=>{
+
+  restaurantModel.getfoodexperienceById(req.params.id, function(results){
+    if (results.length>0) {
+      res.render('home/foodexperiencedetails', {results : results});
+    }
+
+
+  });
+});
+router.post('/foodexperience/:id', (req,res)=>{
+  const date = new Date();
+  var d = new Date();
+  var n = d.toLocaleString().split(",")[0];
+  var year= n.split("/")[2];
+  var month= n.split("/")[1];
+  var day= n.split("/")[0];
+  var currentdate= year+'-'+month+'-'+day;
+
+  var seconds = date.getSeconds();
+var minutes = date.getMinutes();
+var hour = date.getHours();
+
+var ampm = hour >= 12 ? 'PM' : 'AM';
+hour = hour % 12;
+hour = hour ? hour : 12; // the hour '0' should be '12'
+minutes = minutes < 10 ? '0'+minutes : minutes;
+let time= hour +':'+minutes+':'+seconds +' '+ampm;
+
+
+  let comment= {
+    postid : req.params.id,
+    commentby : req.cookies['uname'],
+    comment : req.body.post,
+    date : currentdate,
+    time : time
+  }
+  
+  restaurantModel.insertFoodexpComment(comment, function(status){
+
+   if(status){
+      
+       res.redirect('/foodexperience/'+req.params.id+'');
+      
+       
+   }else{
+       res.send('somwthing wrong!');
+
+   }
+
+});
+});
 
 router.get('/signup', (req, res)=>{
 	res.render('user/signup');
