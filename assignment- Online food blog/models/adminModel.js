@@ -14,6 +14,29 @@ module.exports= {
 		db.getResults(sql, function(results){
 			callback(results);
 		});
-	}
+	},
+	delete: function(id, callback){
+		let sql= 'delete from foodexp where id= "'+id+'" ';
+		db.execute(sql, function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+
+	},
+	
+	deleteexpComment: function(id, callback){
+		let sql= 'delete from foodexpcomment where postid= "'+id+'" ';
+		db.execute(sql, function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+
+	},
 	
 }

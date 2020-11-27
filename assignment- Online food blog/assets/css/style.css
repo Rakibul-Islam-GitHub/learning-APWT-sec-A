@@ -80,3 +80,11 @@ a.color-white.navbar-brand {
 .color-red {
   color: red;
 }
+a.dltbtn {
+  color: brown;
+  position: relative;
+  right: -317px;
+  top: -35px;
+  background-color: bisque;
+  font-size: large;
+}

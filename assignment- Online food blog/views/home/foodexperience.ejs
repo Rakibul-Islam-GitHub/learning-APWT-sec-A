@@ -211,6 +211,10 @@ a.readmore {
             <div class="blog-header">
               <div class="blog-author--no-cover">
                   <h3><i class="fa fa-pencil"></i> <%=post.author%>  <i class="fa fa-clock-o"></i> <%=post.date%></h3>
+                  <% if(role=='admin'){ %>
+                    <a class="dltbtn" href="/admin/foodexperience/delete/<%=post.id%>">Delete</a>
+
+                <%  }  %>
               </div>
             </div>
           

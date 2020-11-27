@@ -3,6 +3,7 @@ const multer            = require('multer');
 const path              = require('path');
 const userModel		= require.main.require('./models/userModel');
 const restaurantModel		= require.main.require('./models/restaurantModel');
+const adminModel	     	= require.main.require('./models/adminModel');
 const { check, validationResult } = require('express-validator');
 const router 	= express.Router();
 
@@ -463,6 +464,34 @@ router.post('/allrestaurant/addmenu/:id', upload.single('pic'), (req, res)=>{
 	});
 	
 });
+
+router.get('/foodexperience/delete/:id', (req, res)=>{
+
+	res.render('home/foodexpdelete');
+
+} );
+router.post('/foodexperience/delete/:id', (req, res)=>{
+
+	let id= req.params.id;
+
+
+      adminModel.delete(id, function(status){
+        if(status){
+			adminModel.deleteexpComment(id, function(status){
+				res.redirect('/foodexperience');
+
+			});
+           
+        }else{
+            res.send('<h1>Something wrong! Try again </h1>');
+        }
+
+        
+        
+	});
+
+
+} );
 
 
 
