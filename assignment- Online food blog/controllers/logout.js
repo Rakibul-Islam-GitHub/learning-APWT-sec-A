@@ -3,9 +3,11 @@ const router 	= express.Router();
 
 router.get('/', (req, res)=>{
 
-	
+
 	res.clearCookie('uname');
-	res.redirect('/login');
+	res.clearCookie('role');
+	//res.cookie['role']== null;
+	res.redirect('/');
 });
 
 

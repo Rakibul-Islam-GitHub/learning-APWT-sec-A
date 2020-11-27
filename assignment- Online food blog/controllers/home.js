@@ -23,7 +23,7 @@ var storage = multer.diskStorage({
 console.log(results);
       if(results.length >0){
         
-        res.render('home/index', {restaurants: results});
+        res.render('home/index', {restaurants: results, role: req.cookies['role']});
       }
   
 });
@@ -47,13 +47,6 @@ console.log(results);
    
   });
 
-  router.get('/restaurant/*',  (req, res, next)=>{
-    if(req.cookies['uname'] == null){
-      res.redirect('/login');
-    }else{
-      next();
-    }
-  });
 
 router.post('/', (req, res)=>{
     
@@ -65,7 +58,7 @@ router.get('/restaurant/:id', (req, res)=>{
 
       if(results.length >0){
         
-        res.render('home/restaurant', {menus: results});
+        res.render('home/restaurant', {menus: results, role: req.cookies['role']});
       }
   
 });
@@ -81,7 +74,7 @@ router.get('/restaurant/:id', (req, res)=>{
           restaurantModel.getcomment(restaurantid,menuid, function(comments){
 
             if(comments.length>0){
-          res.render('home/menudetails', {menus: results, comments});
+          res.render('home/menudetails', {role: req.cookies['role'], menus: results, comments});
            
       
             }else{
@@ -141,7 +134,7 @@ router.get('/foodexperience', (req,res)=>{
 
   restaurantModel.getfoodexperience(function(results){
     if (results.length>0) {
-      res.render('home/foodexperience', {results : results});
+      res.render('home/foodexperience', {results : results, role: req.cookies['role']});
     }
 
 
@@ -192,13 +185,13 @@ router.get('/foodexperience/:id', (req,res)=>{
       restaurantModel.getfoodexperienceComment(req.params.id, function(comments){
         if (results.length>0) {
           console.log(typeof comments);
-          res.render('home/foodexperiencedetails', {results : results, comments: comments});
+          res.render('home/foodexperiencedetails', {role: req.cookies['role'], results : results, comments: comments});
         }else{
           
-          res.render('home/foodexperiencedetails', {results : results});}
+          res.render('home/foodexperiencedetails', {role: req.cookies['role'], results : results});}
     
       });
-    }else{ res.render('home/foodexperiencedetails', {results : results, comments: comments});}
+    }else{ res.render('home/foodexperiencedetails', {role: req.cookies['role'], results : results, comments: comments});}
 
   });
 });

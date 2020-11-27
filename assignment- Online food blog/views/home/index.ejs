@@ -82,9 +82,13 @@ article h3 {
   font-family: "ubuntu";
 }
 .author {
-  margin-top: 15px;
+  margin-top: -11px;
   margin-bottom: 15px;
 }
+.author a {
+  color: rgb(223, 19, 19);
+}
+
 .author-image {
   margin-right: 10px;
   -webkit-border-radius: 100%;
@@ -93,6 +97,9 @@ article h3 {
 }
 .author-name {
   font-size: 1.3em;
+}
+.col-sm-10 {
+    margin-left: -57px;
 }
 
 /* Pager */
@@ -229,8 +236,17 @@ div#output {
       <a class=" color-white navbar-brand" href="#"><i class="fa fa-cutlery"></i> Online Food Blog</a>
       <a class="mr-2 color-white" href="/">Home</a>
        <a class="mr-2 color-white" href="/foodexperience">Food Experience</a>
-       <a class="mr-2 color-white" href="/login">Sign In</a>
-       <a class="mr-2 color-white" href="/signup">Sign Up</a>
+       <% if(role=='admin'){  %>
+        <a class="mr-2 color-white" href="/admin">My Account</a>
+
+     <%  } else if(role=='user'){  %>
+        <a class="mr-2 color-white" href="/user">My Account</a>
+    <% }else{  %>
+        <a class="mr-2 color-white" href="/login">Login</a>
+        <a class="mr-2 color-white" href="/signup">Sign Up</a>
+   <% }  %>
+      
+      
     </div>
    
   </div>
@@ -274,12 +290,10 @@ div#output {
     <article class="article-preview">
       <div class="row">
         <div class="col-sm-2">
-          <img src="/image/<%= restaurant.image %>" alt="restaurant_pic">
+          <a href="/restaurant/<%= restaurant.id %>"><img src="/image/<%= restaurant.image %>" width="90px" height="85px" alt="restaurant_pic"></a>
         </div>
         <div class="col-sm-10">
-          <h2 class="post-title"><a class="color-white" href="#"> <%= restaurant.title %></a></h2>
-          
-          <div class="post-preview"><p><%= restaurant.description %></p></div>
+          <div class="post-preview"><p>Location: <%= restaurant.location %></p></div>
           <div class="author">
             <a href="/restaurant/<%= restaurant.id %>">
              <span class="author-name">View</span>

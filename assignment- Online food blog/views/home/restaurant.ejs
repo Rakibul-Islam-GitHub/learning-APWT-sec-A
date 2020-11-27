@@ -159,18 +159,28 @@ footer a:hover {
   
     <body>
        
-<div id="navbar" class="navbar navbar-default navbar-page-title">
-  <div class="container">
-    <div class="navbar-header">
-      <a class=" color-white navbar-brand" href="#"><i class="fa fa-cutlery"></i> Online Food Blog</a>
-      <a class="mr-2 color-white" href="/">Home</a>
-       <a class="mr-2 color-white" href="/foodexperience">Food Experience</a>
-       <a class="mr-2 color-white" href="/login">Sign In</a>
-       <a class="mr-2 color-white" href="/signup">Sign Up</a>
-    </div>
-   
-  </div>
-</div>
+      <div id="navbar" class="navbar navbar-default navbar-page-title">
+        <div class="container">
+          <div class="navbar-header">
+            <a class=" color-white navbar-brand" href="/"><i class="fa fa-cutlery"></i> Online Food Blog</a>
+            <a class="mr-2 color-white" href="/">Home</a>
+             <a class="mr-2 color-white" href="/foodexperience">Food Experience</a>
+             <% if(role=='admin'){  %>
+              <a class="mr-2 color-white" href="/admin">My Account</a>
+      
+           <%  } else if(role=='user'){  %>
+              <a class="mr-2 color-white" href="/user">My Account</a>
+          <% }else{  %>
+              <a class="mr-2 color-white" href="/login">Login</a>
+              <a class="mr-2 color-white" href="/signup">Sign Up</a>
+         <% }  %>
+            
+            
+          </div>
+         
+        </div>
+      </div>
+      
 
 <header id="page-title" class="jumbotron background">
   <div id="title-image" class="bg">

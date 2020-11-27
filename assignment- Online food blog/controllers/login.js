@@ -5,13 +5,19 @@ const router 		= express.Router();
 
 
 router.get('/', (req, res)=>{
-	res.render('login/index');
+	if (req.cookies['role'] ==undefined) {
+		res.render('login/index');
+		
+	}else if(req.cookies['role']=='admin'){
+		res.redirect('/admin');
+
+	}else{
+		res.redirect('/user');
+	}
+	
 });
 
 router.post('/', (req, res)=>{
-
-	
-	
 
 	var user = {
 		username: req.body.username,
@@ -21,19 +27,21 @@ router.post('/', (req, res)=>{
 
 	userModel.validate(user, function(status){
 
-		console.log(status);
+		
 
 
 		if(status){
 
 			loginModel.getAll(function(results){
 
-				console.log(results[0].role);
+				
 				if(results[0].role=='admin'){
 					res.cookie('uname', req.body.username);
+					res.cookie('role', 'admin');
 					res.redirect('/admin');
 				}else{
 					res.cookie('uname', req.body.username);
+					res.cookie('role', 'user');
 					res.redirect('/user');
 				}
 			});
