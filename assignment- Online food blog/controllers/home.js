@@ -54,11 +54,37 @@ router.post('/', (req, res)=>{
 
 router.get('/restaurant/:id', (req, res)=>{
   let id= req.params.id;
-    restaurantModel.getMenuById(id, function(results){
+    restaurantModel.getMenuByresId(id, function(results){
 
       if(results.length >0){
+        restaurantModel.getRestaurantdetails(id, function(restaurants){
+          let restaurant={
+            description : restaurants[0].description,
+            goal : restaurants[0].goal,
+            name : restaurants[0].name
+
+          }
+          res.render('home/restaurant', {menus: results, resdetails:restaurant, role: req.cookies['role']});
+         
+
+        });
+
         
-        res.render('home/restaurant', {menus: results, role: req.cookies['role']});
+       
+      }else{
+        restaurantModel.getRestaurantdetails(id, function(restaurants){
+          let restaurant={
+            description : restaurants[0].description,
+            goal : restaurants[0].goal,
+            name : restaurants[0].name
+
+          }
+          res.render('home/restaurant', {menus: results, resdetails:restaurant, role: req.cookies['role']});
+         
+
+        });
+       
+        
       }
   
 });
@@ -68,26 +94,21 @@ router.get('/restaurant/:id', (req, res)=>{
   router.get('/restaurant/:restaurantid/menu/:menuid', (req, res)=>{
     let restaurantid= req.params.restaurantid;
     let menuid= req.params.menuid;
-      restaurantModel.getMenuById(restaurantid, function(results){
-  
+    console.log(menuid);
+      restaurantModel.getMenuById(menuid, function(results){
+       
         if(results.length >0){
           restaurantModel.getcomment(restaurantid,menuid, function(comments){
-
             if(comments.length>0){
           res.render('home/menudetails', {role: req.cookies['role'], menus: results, comments});
-           
-      
             }else{
-             res.send('something wrong!');
-             
-      
+              res.render('home/menudetails', {role: req.cookies['role'], menus: results, comments});
             }
-          
-          
-      
           })
-          
-          
+         
+         
+        }else{
+          res.render('home/menudetails', {role: req.cookies['role'], menus: results, comments});
         }
     
   });

@@ -154,6 +154,9 @@ footer a:hover {
   color: azure;
   text-decoration: none !important;
 }
+img.card-img-top {
+    height: 130px;
+}
     </style>
   </head>
   
@@ -184,41 +187,58 @@ footer a:hover {
 
 <header id="page-title" class="jumbotron background">
   <div id="title-image" class="bg">
-    <img src="http://lorempixel.com/1000/570/sports/4/" alt="food_blog">
+    <img height="100px" src="http://lorempixel.com/1000/70/sports/4/" alt="food_blog">
   </div>
   <div class="container">
     <div class="horizontal-center vertical-center">
-      <h1 class="article-title">See this restaurant menus &</h1>
+      <h1 class="article-title">See <%=resdetails.name%> menus &</h1>
       <h2 class="article-subtitle">Get latest review of this restaurant</h2>
     </div>
   </div>
 </header>
 
    <div class="container mb-5">
+     <div>
+       <h4>About Us  </h4>
+       <p> <%=resdetails.description%></p>
+     </div>
+     <div>
+      <h4>Goal  </h4>
+      <p> <%=resdetails.goal%></p>
+    </div>
      <h3>All menus they provide:</h3>
    </div>
+   <% if(menus.length<1){  %>
 
+    
+           <div  class=" container col-8 mb-5 mt-3">
+            <h4 class="color-red">There is no menu at this moment!</h4>
+           </div>
+       <%  }  %>
 <% menus.forEach( function(menu){ %>
-<div class="container  mb-5" style="height: 500px;">
-  <article class="article-preview">
-    <div class="row ml-0 ">
-      
-
-        <div class="card mr-3" style="width: 10rem;">
-            <img class="card-img-top" src="/image/<%=menu.image%>" alt="menu">
-            <div class="card-body"> 
-              <h5 class="card-title"><%=menu.title%></h5>
-              <a href="/restaurant/<%=menu.restaurantid%>/menu/<%=menu.id%>" class="btn btn-primary">Menu Details</a>
-              
-            </div>
+<div class="container  mb-5" >
+  <div class="row">
+    <div class="col-12">
+      <div class="col-4">
+        <article class="article-preview">
+          <div class="row ml-0 ">
+              <div class="card mr-3" style="width: 10rem;">
+                  <img class="card-img-top" src="/image/<%=menu.image%>" alt="menu">
+                  <div class="card-body"> 
+                    <h5 class="card-title"><%=menu.title%></h5>
+                    <a href="/restaurant/<%=menu.restaurantid%>/menu/<%=menu.id%>" class="btn btn-primary">Menu Details</a>
+                    
+                  </div>
+                </div>
           </div>
+        </article>
 
-         
-
-
+      </div>
 
     </div>
-  </article>
+
+  </div>
+  
 </div>
 <%  }); %>
 

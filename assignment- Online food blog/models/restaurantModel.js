@@ -10,6 +10,13 @@ module.exports= {
 
 	},
 	getMenuById: function(id, callback){
+		var sql = 'select * from menu where id = "'+id+'" ';
+		db.getResults(sql, function(results){
+			callback(results);
+		});
+
+	},
+	getMenuByresId: function(id, callback){
 		var sql = 'select * from menu where restaurantid = "'+id+'" ';
 		db.getResults(sql, function(results){
 			callback(results);
@@ -29,6 +36,13 @@ module.exports= {
 		db.getResults(sql, function(results){
 			callback(results);
 		});
+	},
+	getRestaurantdetails: function(restaurantid, callback){
+		var sql = 'select * from restaurant where id = "'+restaurantid+'" ';
+		db.getResults(sql, function(results){
+			callback(results);
+		});
+
 	},
 
 	getfoodexperience :  function(callback){
@@ -53,7 +67,7 @@ module.exports= {
 
 	insert: function(restaurant, callback){
 
-		let sql= 'insert into restaurant (name, location, phone, description, image) values ("'+restaurant.name+'", "'+restaurant.location+'", "'+restaurant.phone+'", "'+restaurant.description+'", "'+restaurant.image+'")';
+		let sql= 'insert into restaurant (name, location, phone, goal, description, image) values ("'+restaurant.name+'", "'+restaurant.location+'", "'+restaurant.phone+'",  "'+restaurant.goal+'", "'+restaurant.description+'", "'+restaurant.image+'")';
 		db.execute(sql, function(status){
 
 			if(status){

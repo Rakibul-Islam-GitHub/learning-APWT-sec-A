@@ -161,7 +161,8 @@ router.post('/addrestaurant', upload.single('pic'), (req, res)=>{
 			
         name : req.body.name,
         location : req.body.location,
-        phone : req.body.phone,
+		phone : req.body.phone,
+		goal: req.body.goal,
         description: req.body.description,
         image: req.file.filename
         

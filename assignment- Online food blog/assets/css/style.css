@@ -77,3 +77,6 @@ a.color-white.navbar-brand {
   color: rgb(160 22 169);
   font-size: larger;
 }
+.color-red {
+  color: red;
+}
