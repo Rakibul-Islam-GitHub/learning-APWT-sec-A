@@ -30,6 +30,23 @@ console.log(results);
 
   });
 
+  router.post('/search', function(req, res){
+    let content = req.body.query;
+	console.log(content);
+	restaurantModel.search(content, function(results){
+
+        if(results.length >0){
+		 
+		res.json(results);
+		
+
+        }
+		
+	});
+
+   
+  });
+
   router.get('/restaurant/*',  (req, res, next)=>{
     if(req.cookies['uname'] == null){
       res.redirect('/login');
@@ -172,9 +189,16 @@ router.get('/foodexperience/:id', (req,res)=>{
 
   restaurantModel.getfoodexperienceById(req.params.id, function(results){
     if (results.length>0) {
-      res.render('home/foodexperiencedetails', {results : results});
-    }
-
+      restaurantModel.getfoodexperienceComment(req.params.id, function(comments){
+        if (results.length>0) {
+          console.log(typeof comments);
+          res.render('home/foodexperiencedetails', {results : results, comments: comments});
+        }else{
+          
+          res.render('home/foodexperiencedetails', {results : results});}
+    
+      });
+    }else{ res.render('home/foodexperiencedetails', {results : results, comments: comments});}
 
   });
 });

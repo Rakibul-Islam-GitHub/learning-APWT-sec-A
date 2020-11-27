@@ -44,6 +44,12 @@ module.exports= {
 			callback(results);
 		});
 	},
+	getfoodexperienceComment: function(postid, callback){
+		var sql = 'select * from foodexpcomment where postid= "'+postid+'"';
+		db.getResults(sql, function(results){
+			callback(results);
+		});
+	},
 
 	insert: function(restaurant, callback){
 
@@ -139,7 +145,7 @@ module.exports= {
 	},
 
 	search: function(content, callback){
-		var sql = 'SELECT name from restaurant where name like "%'+content+'%"';
+		var sql = 'SELECT id,name from restaurant where LOWER(name) like "%'+content+'%" OR location like "%'+content+'%"';
 		db.getResults(sql, function(results){
 			callback(results);
 		});
