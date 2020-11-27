@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Admin/userlist</title>
+    <title>Admin/Menulist</title>
     <link rel="stylesheet" href="/css/style.css">
   </head>
 
@@ -11,9 +11,9 @@
   
     <body>
         <div id="list-table2">
-            <h1> Restaurant List</h1>
+            <h1> Menu List</h1>
             
-            <a class="myButton" href="/admin"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <a class="myButton" href="/admin/allrestaurant"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z"/>
                 
             </svg> Back</a>
@@ -27,8 +27,8 @@
                 <th>ID</th>
                 <th>Image</th>
                 <th>Name</th>
-                <th>Location</th>
-                <th>Mobile no.</th>
+                <th>Details</th>
+                <th>Price no.</th>
                 
                 <th>Action</th>
                 </tr>
@@ -38,15 +38,14 @@
                 <tr>
                     <td><%= restaurant.id %></td>
                     <td><img src="/image/<%= restaurant.image %>" width="32" height="25" alt="pic"></td>
-                    <td><%= restaurant.name %></td>
-                    <td><%= restaurant.location %></td>
-                    <td><%= restaurant.phone %></td>
+                    <td><%= restaurant.title %></td>
+                    <td><%= restaurant.details.substring(0,50) %></td>
+                    <td><%= restaurant.price %></td>
                    
                     <td>
-                        <a class="editdltbtn" href="/admin/allrestaurant/addmenu/<%= restaurant.id %>">Add Menu</a> |
-                        <a class="editdltbtn" href="/admin/allrestaurant/managemenu">View Menu</a> |
-                        <a class="editdltbtn" href="/admin/allrestaurant/edit/<%= restaurant.id %>">Edit</a> |
-                        <a class="editdltbtn" href="/admin/allrestaurant/delete/<%= restaurant.id %>">Delete</a>
+                        
+                        <a class="editdltbtn" href="/admin/allrestaurant/managemenu/edit/<%= restaurant.id %>">Edit</a> |
+                        <a class="editdltbtn" href="/admin/allrestaurant/managemenu/delete/<%= restaurant.id %>">Delete</a>
                     </td>
                 </tr>
     

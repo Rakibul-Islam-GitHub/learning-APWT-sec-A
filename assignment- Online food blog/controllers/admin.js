@@ -306,14 +306,8 @@ router.get('/allrestaurant/delete/:id', (req, res)=>{
 		var location = results[0].location;
 		var phone = results[0].phone;
 
-		res.render('restaurant/delete', {name: name, location: location, phone: phone});
-
-		
-	});
-
-
-	
-	
+		res.render('restaurant/delete', {name: name, location: location, phone: phone});	
+	});	
 });
 
 router.post('/allrestaurant/delete/:id', (req, res)=>{
@@ -324,6 +318,48 @@ router.post('/allrestaurant/delete/:id', (req, res)=>{
     restaurantModel.delete(id, function(status){
         if(status){
             res.redirect('/admin/allrestaurant');
+        }else{
+            res.send('<h1>Something wrong! Try again </h1>');
+        }
+
+        
+        
+	});
+	
+});
+router.get('/allrestaurant/managemenu', function(req, res){
+    restaurantModel.getAllmenu(function(results){
+
+        
+		res.render('admin/menumanage', {restaurants: results});
+
+        
+		
+	});
+
+
+});
+router.get('/allrestaurant/managemenu/delete/:id', (req, res)=>{
+	let id= req.params.id;
+
+	restaurantModel.getMenuById(id, function(results){
+		
+		var title = results[0].title;
+		var details = results[0].details;
+		var price = results[0].price;
+
+		res.render('menu/delete', {title: title, details: details, price: price});	
+	});	
+});
+
+router.post('/allrestaurant/managemenu/delete/:id', (req, res)=>{
+
+	let id= req.params.id;
+
+
+    restaurantModel.deleteMenu(id, function(status){
+        if(status){
+            res.redirect('/admin/allrestaurant/managemenu');
         }else{
             res.send('<h1>Something wrong! Try again </h1>');
         }

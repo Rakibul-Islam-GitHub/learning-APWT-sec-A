@@ -9,6 +9,12 @@ module.exports= {
 		});
 
 	},
+	getAllmenu: function(callback){
+		var sql = "select * from menu";
+		db.getResults(sql, function(results){
+			callback(results);
+		});
+	},
 	getMenuById: function(id, callback){
 		var sql = 'select * from menu where id = "'+id+'" ';
 		db.getResults(sql, function(results){
@@ -167,6 +173,17 @@ module.exports= {
 	},
 	delete: function(id, callback){
 		let sql= 'delete from restaurant where id= "'+id+'" ';
+		db.execute(sql, function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+
+	},
+	deleteMenu: function(id, callback){
+		let sql= 'delete from menu where id= "'+id+'" ';
 		db.execute(sql, function(status){
 			if(status){
 				callback(true);
