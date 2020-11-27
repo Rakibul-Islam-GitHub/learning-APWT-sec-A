@@ -167,6 +167,13 @@ footer a:hover {
     margin-right: 15px !important;
 
 }
+a.readmore {
+    background-color: #d3770fd9;
+    border: 1px solid lightblue;
+    color: azure;
+    text-decoration: none !important;
+    margin-top: -2px;
+}
     </style>
   </head>
   
@@ -210,8 +217,9 @@ footer a:hover {
             <div class="blog-body">
               
               <div class="blog-summary">
-                <p><%=post.post%></p>
-                      <a href="/foodexperience/<%=post.id%>">Read More</a>
+                
+                <p><%=post.post.substring(0, 180)+'....'%></p>
+                      <a class="readmore" href="/foodexperience/<%=post.id%>">Read More</a>
                     </div>
               
             </div>
@@ -226,7 +234,7 @@ footer a:hover {
 
 
        </div>
-       
+       <% if(role=='admin' || role=='user'){  %>
     <div class="col-8 mb-5 mt-5">
         <h3>Post Your food Experience Here :</h3>
         <form action="" method="POST">
@@ -234,6 +242,11 @@ footer a:hover {
          <input class="btn btn-primary mt-2" id="comment"   name="" type="submit" value="Post Your Experience">
         </form>
       </div>
+      <%  }else{ %>
+        <div  class="col-8 mb-5 mt-3">
+          <a class="mt-5 signuplink" href="/signup">Please sign up to post a review!</a>
+        </div>
+    <%  }  %>
    </div>
 
 

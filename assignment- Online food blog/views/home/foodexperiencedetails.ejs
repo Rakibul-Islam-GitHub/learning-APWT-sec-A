@@ -197,6 +197,7 @@ footer a:hover {
     
    <div class="container mt-5">
        <div class="col-12">
+         <h3>Post Details :</h3>
            
         <% results.forEach( function(post){ %>
           <div class="blog-container">
@@ -257,7 +258,7 @@ footer a:hover {
    <% };  %>
 
        </div>
-       
+       <% if(role=='admin' || role=='user'){  %>
     <div class="col-8 mb-5 mt-5">
         <h3>Comment Here :</h3>
         <form action="" method="POST">
@@ -265,6 +266,11 @@ footer a:hover {
          <input class="btn btn-primary mt-2" id="comment"   name="" type="submit" value="Submit">
         </form>
       </div>
+      <%  }else{ %>
+        <div  class="col-8 mb-5 mt-3">
+          <a class="mt-5 signuplink" href="/signup">Please sign up to comment!</a>
+        </div>
+    <%  }  %>
    </div>
 
 

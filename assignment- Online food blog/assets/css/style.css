@@ -72,3 +72,8 @@ a.color-white.navbar-brand {
   font-size: 30px;
   margin-right: 300px;
 }
+.signuplink {
+  text-decoration: none !important;
+  color: rgb(160 22 169);
+  font-size: larger;
+}

@@ -27,15 +27,11 @@ router.post('/', (req, res)=>{
 
 	userModel.validate(user, function(status){
 
-		
-
-
 		if(status){
 
-			loginModel.getAll(function(results){
-
-				
+			loginModel.getRole(user, function(results){
 				if(results[0].role=='admin'){
+					console.log(results[0].role);
 					res.cookie('uname', req.body.username);
 					res.cookie('role', 'admin');
 					res.redirect('/admin');
@@ -46,12 +42,6 @@ router.post('/', (req, res)=>{
 				}
 			});
 			
-
-
-
-			
-
-
 		}else{
 			res.redirect('/login');
 

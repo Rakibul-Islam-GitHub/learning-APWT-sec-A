@@ -25,6 +25,13 @@ module.exports= {
 			callback(results);
 		});
 	},
+	getRole: function(user, callback){
+		var sql = 'select role from users where username = "'+user.username+'"and password= "'+user.password+'" ';
+		db.getResults(sql, function(results){
+			callback(results);
+		});
+
+	},
 	insert: function(user, callback){
 
 		let sql= 'insert into users (username, password, role) values ("'+user.username+'", "'+user.password+'", "user")';

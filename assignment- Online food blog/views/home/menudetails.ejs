@@ -165,8 +165,8 @@ footer a:hover {
 .comment_details li{
     list-style: none !important;
     margin-right: 15px !important;
-
 }
+
     </style>
   </head>
   
@@ -250,14 +250,20 @@ footer a:hover {
           
             </div>
           
-
+           <% if(role=='admin' || role=='user'){  %>
             <div class="card mt-2">
-                <h3>Give a review or comment</h3>
-                <form action="" method="POST">
-                 <textarea class="form-control" name="comment" id="cmt" required cols="30" rows="7"></textarea>
-                 <input class="btn btn-primary mt-3" id="comment"   name="" type="submit" value="Submit">
-                </form>
-              </div>
+              <h3>Give a review or comment</h3>
+              <form action="" method="POST">
+               <textarea class="form-control" name="comment" id="cmt" required cols="30" rows="7"></textarea>
+               <input class="btn btn-primary mt-3" id="comment"   name="" type="submit" value="Submit">
+              </form>
+            </div>
+
+          <%  }else{ %>
+            <a class="mt-5 signuplink" href="/signup">Please sign up to comment!</a>
+
+        <%  }  %>
+            
           </div>
 
          
