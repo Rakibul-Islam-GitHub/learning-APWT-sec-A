@@ -327,8 +327,9 @@ router.post('/allrestaurant/delete/:id', (req, res)=>{
 	});
 	
 });
-router.get('/allrestaurant/managemenu', function(req, res){
-    restaurantModel.getAllmenu(function(results){
+router.get('/allrestaurant/managemenu/:id', function(req, res){
+	let id= req.params.id;
+    restaurantModel.getMenuByresId(id,function(results){
 
         
 		res.render('admin/menumanage', {restaurants: results});
@@ -368,6 +369,68 @@ router.post('/allrestaurant/managemenu/delete/:id', (req, res)=>{
         
 	});
 	
+});
+
+router.get('/allrestaurant/managemenu/edit/:id', (req, res)=>{
+	let id= req.params.id;
+
+	restaurantModel.getMenuById(id, function(results){
+		console.log(results[0].name);
+		var name = results[0].title;
+		var details = results[0].details;
+		var price = results[0].price;
+		var image = results[0].image;
+		
+		res.render('menu/edit', {name: name, details: details, price: price});
+
+		
+	});
+  
+});
+
+router.post('/allrestaurant/managemenu/edit/:id', upload.single('pic'), (req, res)=>{
+    
+    
+    let menu={
+		id : req.params.id,	
+        title : req.body.name,
+        details : req.body.details,
+        price : req.body.price,
+       
+        image: req.file.filename
+        
+
+    };
+    // console.log(restaurant);
+
+    restaurantModel.updateMenu(menu, function(status){
+
+
+        if(status){
+            console.log('menu updated');
+            res.redirect('/admin/allrestaurant/managemenu/edit/'+req.params.id+'');
+        }else{
+			res.send('something wrong!');
+
+        }
+
+    });
+
+  
+});
+
+
+router.get('/allrestaurant/delete/:id', (req, res)=>{
+	let id= req.params.id;
+
+	restaurantModel.getById(id, function(results){
+		console.log(results[0].name);
+		var name = results[0].name;
+		var location = results[0].location;
+		var phone = results[0].phone;
+
+		res.render('restaurant/delete', {name: name, location: location, phone: phone});	
+	});	
 });
 router.get('/allrestaurant/addmenu/:id', (req, res)=>{
 

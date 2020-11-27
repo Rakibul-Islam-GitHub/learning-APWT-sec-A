@@ -160,7 +160,16 @@ module.exports= {
 			}
 		});
 
-		
+	},
+	updateMenu: function(menu, callback){
+		let sql= 'update menu set title= "'+menu.title+'", price= "'+menu.price+'", details= "'+menu.details+'", image="'+menu.image+'" where id= "'+menu.id+'"';
+		db.execute(sql, function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
 
 	},
 
